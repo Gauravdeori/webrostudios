@@ -10,11 +10,12 @@ const ShowcaseSection = () => {
   return (
     <section id="work" className="py-24 px-6">
       <div className="container mx-auto max-w-5xl">
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+        <motion.div
+           initial={{ opacity: 0, y: 30 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8, ease: "easeOut" }}
+           className="text-center mb-16"
         >
           <motion.span 
             initial={{ scale: 0.9, opacity: 0 }}
