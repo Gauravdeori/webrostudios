@@ -55,7 +55,7 @@ const ShowcaseSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="group block p-8 rounded-2xl bg-card shadow-soft border border-border/50 hover:shadow-card transition-all duration-300"
+              className="group block p-8 rounded-2xl bg-card shadow-soft border border-black/10 hover:shadow-card transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-3">
                 <div>

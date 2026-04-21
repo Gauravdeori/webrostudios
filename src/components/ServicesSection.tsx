@@ -61,7 +61,7 @@ const ServicesSection = () => {
                 boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
                 borderColor: "hsl(var(--primary))"
               }}
-              className="text-center p-8 rounded-2xl bg-card shadow-soft border border-border/50 transition-colors duration-300"
+              className="text-center p-8 rounded-2xl bg-card shadow-soft border border-black/10 transition-colors duration-300"
             >
               <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-6">
                 <s.icon className="w-8 h-8 text-accent-foreground" />

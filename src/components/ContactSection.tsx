@@ -177,7 +177,7 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2 space-y-8"
           >
-            <div className="p-6 rounded-2xl bg-card shadow-soft border border-border/50">
+            <div className="p-6 rounded-2xl bg-card shadow-soft border border-black/10">
               <h3 className="text-lg font-semibold text-foreground mb-4">Reach Us Directly</h3>
               <div className="space-y-4">
                 <a

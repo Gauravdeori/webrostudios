@@ -19,23 +19,23 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="inline-block mb-6 px-5 py-2 rounded-full bg-accent/80 text-accent-foreground text-sm font-medium tracking-wide backdrop-blur-sm border border-border/30"
+            className="inline-block mb-6 px-5 py-2 rounded-full bg-accent/80 text-accent-foreground text-sm font-medium tracking-wide backdrop-blur-sm border border-black/10"
           >
             Web Design & Development Studio
           </motion.span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-foreground tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight mb-6 text-foreground tracking-tight px-2">
             Webro Studios is with you
             <br />
             <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'var(--gradient-cta)' }}>— beyond launch.</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed px-4">
             We don't just build your website — we maintain it, optimize it, and keep it thriving at absolutely no extra cost. Your success is our commitment.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="lg" asChild>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-6">
+            <Button variant="hero" size="lg" asChild className="w-full sm:w-auto border border-black/20">
               <a href="#contact">Get Started Today</a>
             </Button>
-            <Button variant="heroOutline" size="lg" asChild>
+            <Button variant="heroOutline" size="lg" asChild className="w-full sm:w-auto border border-black/40">
               <a href="#services">Explore Services</a>
             </Button>
           </div>

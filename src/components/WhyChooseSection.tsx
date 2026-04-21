@@ -74,7 +74,7 @@ const WhyChooseSection = () => {
                 boxShadow: "0 15px 30px rgba(0,0,0,0.05)",
                 borderColor: "hsl(var(--primary) / 0.3)"
               }}
-              className="group p-8 rounded-2xl bg-card shadow-soft border border-border/50 transition-all duration-300"
+              className="group p-8 rounded-2xl bg-card shadow-soft border border-black/10 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl gradient-cta flex items-center justify-center mb-5">
                 <f.icon className="w-6 h-6 text-primary-foreground" />
