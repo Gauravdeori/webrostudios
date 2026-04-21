@@ -25,19 +25,36 @@ const WhyChooseSection = () => {
     <section className="py-24 px-6">
       <div className="container mx-auto max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+          <motion.span 
+            initial={{ y: -10, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium"
+          >
             Why Us
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Why Choose Webro?</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          </motion.span>
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="text-3xl md:text-5xl font-bold text-foreground mb-4"
+          >
+            Why Choose Webro?
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="text-muted-foreground text-lg max-w-2xl mx-auto"
+          >
             Affordable, fast, efficient, and SEO-friendly — with ongoing maintenance at no extra cost.
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div
@@ -51,7 +68,13 @@ const WhyChooseSection = () => {
             <motion.div
               key={f.title}
               variants={item}
-              className="group p-8 rounded-2xl bg-card shadow-soft border border-border/50 hover:shadow-card transition-shadow duration-300"
+              whileHover={{ 
+                y: -5,
+                scale: 1.03,
+                boxShadow: "0 15px 30px rgba(0,0,0,0.05)",
+                borderColor: "hsl(var(--primary) / 0.3)"
+              }}
+              className="group p-8 rounded-2xl bg-card shadow-soft border border-border/50 transition-all duration-300"
             >
               <div className="w-12 h-12 rounded-xl gradient-cta flex items-center justify-center mb-5">
                 <f.icon className="w-6 h-6 text-primary-foreground" />
