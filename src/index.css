@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 120 20% 99%;
+    --foreground: 260 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 260 30% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 30% 15%;
+    --primary: 152 55% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 270 40% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 120 15% 96%;
+    --muted-foreground: 260 10% 50%;
+    --accent: 270 30% 95%;
+    --accent-foreground: 270 40% 35%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 260 15% 90%;
+    --input: 260 15% 90%;
+    --ring: 152 55% 42%;
+    --radius: 0.75rem;
+    --gradient-hero: linear-gradient(135deg, hsl(120 30% 97%) 0%, hsl(270 30% 97%) 50%, hsl(120 20% 99%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(152 55% 42%), hsl(270 40% 55%));
+    --shadow-soft: 0 4px 30px hsl(260 30% 15% / 0.06);
+    --shadow-card: 0 8px 40px hsl(260 30% 15% / 0.08);
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  .gradient-cta {
+    background-image: var(--gradient-cta);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+}
