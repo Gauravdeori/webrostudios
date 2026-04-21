@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { ExternalLink, Globe } from "lucide-react";
 
 const projects = [
-  { name: "Amaaradda", url: "https://www.amaaradda.shop", description: "A vibrant community platform with modern design and seamless user experience.", tag: "Community" },
-  { name: "Echoes of Poba", url: "https://www.echoesofpoba.in", description: "An immersive storytelling experience — beautifully designed and fully responsive.", tag: "Storytelling" },
+  { name: "Amaaradda", url: "https://www.amaaradda.shop", description: "A seamless food delivery app built for a premium restaurant experience.", tag: "Food Delivery" },
+  { name: "Echoes of Poba", url: "https://www.echoesofpoba.in", description: "A dedicated platform for a nature NGO, focusing on conservation and environmental storytelling.", tag: "Nature NGO" },
 ];
 
 const ShowcaseSection = () => {
