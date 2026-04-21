@@ -6,9 +6,16 @@ const Footer = () => {
       <div className="container mx-auto max-w-5xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           <div>
-            <h3 className="text-xl font-bold text-foreground mb-3" style={{ fontFamily: 'var(--font-display)' }}>
-              Webro Studios
-            </h3>
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/favicon.jpeg" 
+                alt="Webro Studios Logo" 
+                className="w-10 h-10 rounded-xl shadow-md"
+              />
+              <h3 className="text-xl font-bold text-foreground" style={{ fontFamily: 'var(--font-display)' }}>
+                Webro Studios
+              </h3>
+            </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Building beautiful, fast, and SEO-friendly websites — with free maintenance forever.
             </p>
