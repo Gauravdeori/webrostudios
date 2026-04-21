@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    --background: 120 20% 99% / 0.85;
+    --background: 120 20% 99% / 0.65;
     --foreground: 260 30% 15%;
-    --card: 0 0% 100%;
+    --card: 0 0% 100% / 0.7;
     --card-foreground: 260 30% 15%;
     --popover: 0 0% 100%;
     --popover-foreground: 260 30% 15%;
@@ -26,7 +26,7 @@
     --input: 260 15% 90%;
     --ring: 152 55% 42%;
     --radius: 0.75rem;
-    --gradient-hero: linear-gradient(135deg, hsl(120 30% 97% / 0.7) 0%, hsl(270 30% 97% / 0.7) 50%, hsl(120 20% 99% / 0.7) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(120 30% 97% / 0.45) 0%, hsl(270 30% 97% / 0.45) 50%, hsl(120 20% 99% / 0.45) 100%);
     --gradient-cta: linear-gradient(135deg, hsl(152 55% 42%), hsl(270 40% 55%));
     --shadow-soft: 0 4px 30px hsl(260 30% 15% / 0.06);
     --shadow-card: 0 8px 40px hsl(260 30% 15% / 0.08);
