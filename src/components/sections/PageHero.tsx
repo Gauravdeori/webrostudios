@@ -27,7 +27,7 @@ export function PageHero({
         <h1 className="glow max-w-4xl text-[42px] font-bold leading-[1.05] text-ink md:text-6xl">
           {title}
         </h1>
-        <p className="cursor-blink mt-5 max-w-2xl font-mono text-sm text-muted-foreground md:text-base">
+        <p className="cursor-blink mt-5 max-w-2xl text-base text-muted-foreground md:text-lg">
           {subtitle}
         </p>
         {children}

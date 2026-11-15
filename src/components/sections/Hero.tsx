@@ -24,11 +24,11 @@ export function Hero() {
       id="home"
       data-section="home"
       data-label="Home"
-      className="relative overflow-hidden bg-background py-16 md:py-24"
+      className="relative overflow-hidden bg-background py-10 md:py-24"
     >
       <div
         aria-hidden="true"
-        className="absolute left-[8%] top-10 h-4 w-4 animate-float-px bg-slate-light"
+        className="absolute left-[8%] top-10 hidden h-4 w-4 animate-float-px bg-slate-light md:block"
       />
       <div
         aria-hidden="true"
@@ -40,7 +40,7 @@ export function Hero() {
             &lt;/ webro studios /&gt;
           </p>
           <h1
-            className="glow min-h-[3.4em] text-[42px] font-bold leading-[1.02] text-ink md:text-[66px] lg:text-[72px]"
+            className="glow min-h-[3.4em] text-[40px] font-bold leading-[1.04] text-ink sm:text-[52px] md:text-[66px] lg:text-[72px]"
             aria-label="We Build Digital Experiences That Matter."
           >
             <span aria-hidden="true">
@@ -55,7 +55,7 @@ export function Hero() {
             A student-led product & web development studio from Assam, crafting modern, scalable and
             impactful websites, apps and platforms for startups, brands and institutions.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
             <Button asChild variant="px" size="px">
               <SectionLink id="contact">
                 Start a Project <ArrowRight />
@@ -75,11 +75,11 @@ export function Hero() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 font-mono text-xs text-muted-foreground md:text-sm">
+          <p className="mt-6 text-sm text-muted-foreground">
             ⭐ {projects.length} live projects · Websites from ₹5,000 · Based in Dibrugarh, Assam
           </p>
         </div>
-        <div className="relative animate-page-in [animation-delay:150ms]">
+        <div className="relative mx-auto w-full max-w-md animate-page-in [animation-delay:150ms] lg:max-w-none">
           <img
             src={heroImg}
             alt="Retro computer showing the Webro W logo, with a code window, coffee mug and stacked books"
@@ -94,7 +94,7 @@ export function Hero() {
         id="services"
         className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 animate-float-px text-ink md:block"
       >
-        <span className="sr-only">Scroll to services</span>
+        <span className="sr-only">Go to services</span>
         <ChevronsDown className="h-7 w-7" />
       </SectionLink>
     </section>

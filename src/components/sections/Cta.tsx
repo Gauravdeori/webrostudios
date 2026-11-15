@@ -38,7 +38,7 @@ export function Cta() {
         <h2 className="glow text-5xl font-bold md:text-7xl">
           Have an <span className="hl">Idea?</span>
         </h2>
-        <p className="cursor-blink mx-auto mt-5 max-w-xl font-mono text-lg text-slate-light">
+        <p className="cursor-blink mx-auto mt-5 max-w-xl text-lg text-slate-light">
           Let's turn it into a product people love.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">

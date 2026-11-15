@@ -99,7 +99,8 @@ export function ProjectGrid({ limit }: { limit?: number }) {
   );
 }
 
-export function Projects() {
+/** Homepage work section. `limit` caps the grid; leave it out to show every project. */
+export function Projects({ limit }: { limit?: number } = {}) {
   return (
     <Section id="work" label="Work" tone="white">
       <SectionHeading
@@ -111,14 +112,16 @@ export function Projects() {
         }
         subtitle={`${projects.length} real products, live right now. Click through and try them.`}
       />
-      <ProjectGrid limit={6} />
-      <div className="mt-12 text-center">
-        <Button asChild variant="px" size="px">
-          <Link to="/work">
-            View All {projects.length} Projects <ArrowRight />
-          </Link>
-        </Button>
-      </div>
+      <ProjectGrid {...(limit ? { limit } : {})} />
+      {limit && limit < projects.length && (
+        <div className="mt-12 text-center">
+          <Button asChild variant="px" size="px">
+            <Link to="/work">
+              View All {projects.length} Projects <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      )}
     </Section>
   );
 }

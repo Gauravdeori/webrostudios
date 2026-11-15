@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import Lenis from "lenis";
 import {
   ArrowUp,
@@ -19,6 +19,7 @@ import { navLinks, pageLinks, services, site } from "@/data/content";
 import { Logo } from "./primitives";
 import { cn } from "@/lib/utils";
 import { getLenis, scrollToSection, scrollToTop, setLenis } from "@/lib/scroll";
+import { useActivePanel } from "@/lib/panels";
 import { useTheme } from "@/lib/theme";
 import { submitForm } from "@/lib/contact";
 
@@ -54,6 +55,7 @@ export function SmoothScroll() {
 type SectionInfo = { id: string; label: string };
 function useSections() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const panel = useActivePanel();
   const [sections, setSections] = useState<SectionInfo[]>([]);
   const [active, setActive] = useState("");
   useEffect(() => {
@@ -70,16 +72,20 @@ function useSections() {
     );
     els.forEach((e) => io.observe(e));
     return () => io.disconnect();
-  }, [pathname]);
-  return { sections, active, pathname };
+  }, [pathname, panel]);
+  return { sections, active, pathname, panel };
 }
 
 export function AnnouncementBar() {
   const [open, setOpen] = useState(true);
   if (!open) return null;
   return (
-    <div className="relative border-b-2 border-navy bg-lime px-10 py-2 text-center font-mono text-xs font-bold text-navy md:text-sm">
-      🚀 Websites from ₹5,000 — Free consultation for startups & institutions{" "}
+    <div className="relative border-b-2 border-navy bg-lime py-2 pl-4 pr-10 text-center font-mono text-xs font-bold text-navy md:px-10 md:text-sm">
+      🚀 Websites from ₹5,000
+      <span className="hidden sm:inline">
+        {" "}
+        — Free consultation for startups & institutions
+      </span>{" "}
       <SectionLink id="contact" className="underline underline-offset-4">
         → Book a call
       </SectionLink>
@@ -101,7 +107,7 @@ const socials = [
   { href: site.socials.x, label: "X (Twitter)", Icon: Twitter },
 ];
 
-/** Links to a homepage section: smooth-scrolls when already on "/", otherwise navigates there. */
+/** Opens a homepage panel ("/#pricing"). Works from any page; only that panel is shown. */
 export function SectionLink({
   id,
   children,
@@ -115,30 +121,22 @@ export function SectionLink({
   onNavigate?: () => void;
   "aria-current"?: "true" | undefined;
 }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const navigate = useNavigate();
   const onClick = (e: MouseEvent) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
     onNavigate?.();
-    if (pathname === "/" && !e.metaKey && !e.ctrlKey && scrollToSection(id)) e.preventDefault();
+    void navigate({
+      to: "/",
+      ...(id === "home" ? {} : { hash: id }),
+      hashScrollIntoView: false,
+      resetScroll: false,
+    });
   };
-  // On the homepage the link only scrolls, so a plain anchor avoids the router marking every
-  // "/" link as the current page. Elsewhere it navigates to "/#id".
-  if (pathname === "/") {
-    return (
-      <a href={id === "home" ? "/" : `/#${id}`} onClick={onClick} className={className} {...rest}>
-        {children}
-      </a>
-    );
-  }
   return (
-    <Link
-      to="/"
-      {...(id === "home" ? {} : { hash: id })}
-      onClick={onClick}
-      className={className}
-      {...rest}
-    >
+    <a href={id === "home" ? "/" : `/#${id}`} onClick={onClick} className={className} {...rest}>
       {children}
-    </Link>
+    </a>
   );
 }
 
@@ -182,7 +180,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const bar = useRef<HTMLDivElement>(null);
-  const { active, pathname } = useSections();
+  const { pathname, panel } = useSections();
+  const tabs = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     let raf = 0;
@@ -218,7 +217,18 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", esc);
   }, [open]);
 
-  const isActive = (id: string) => (pathname === "/" ? active === id : `/${id}` === pathname);
+  const isActive = (id: string) => (pathname === "/" ? panel === id : `/${id}` === pathname);
+
+  // Keep the active mobile tab in view.
+  useEffect(() => {
+    const ul = tabs.current;
+    const el = ul?.querySelector<HTMLElement>("[aria-current]");
+    if (ul && el)
+      ul.scrollTo({
+        left: el.offsetLeft - (ul.clientWidth - el.offsetWidth) / 2,
+        behavior: "smooth",
+      });
+  }, [panel, pathname]);
 
   return (
     <header
@@ -279,6 +289,38 @@ export function Navbar() {
           </button>
         </div>
       </nav>
+      {/* mobile section tabs */}
+      <ul
+        ref={tabs}
+        aria-label="Sections"
+        className="flex gap-1 overflow-x-auto overscroll-x-contain border-t-2 border-ink px-3 py-2 [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden"
+      >
+        {navLinks.map((l) => (
+          <li key={l.id} className="shrink-0">
+            <SectionLink
+              id={l.id}
+              aria-current={isActive(l.id) ? "true" : undefined}
+              className={cn(
+                "block border-2 px-2.5 py-1 font-mono text-xs font-bold transition-colors duration-200",
+                isActive(l.id)
+                  ? "border-ink bg-lime text-navy"
+                  : "border-transparent text-ink active:border-ink",
+              )}
+            >
+              {l.label}
+            </SectionLink>
+          </li>
+        ))}
+        <li className="shrink-0">
+          <Link
+            to="/blog"
+            className="block border-2 border-transparent px-2.5 py-1 font-mono text-xs font-bold text-ink"
+            activeProps={{ className: "!border-ink bg-lime !text-navy", "aria-current": "true" }}
+          >
+            Blog
+          </Link>
+        </li>
+      </ul>
       <div aria-hidden="true" className="absolute inset-x-0 -bottom-[2px] h-[3px] overflow-hidden">
         <div ref={bar} className="h-full origin-left scale-x-0 bg-lime" />
       </div>
@@ -320,7 +362,7 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="flex items-baseline gap-3 font-display text-3xl font-bold hover:text-lime"
                 >
-                  <span className="font-pixel text-sm text-lime">0{i + 1}</span>
+                  <span className="font-mono text-sm text-lime">0{i + 1}</span>
                   {l.label}
                 </Link>
               ) : (
@@ -329,7 +371,7 @@ export function Navbar() {
                   onNavigate={() => setOpen(false)}
                   className="flex items-baseline gap-3 font-display text-3xl font-bold hover:text-lime"
                 >
-                  <span className="font-pixel text-sm text-lime">0{i + 1}</span>
+                  <span className="font-mono text-sm text-lime">0{i + 1}</span>
                   {l.label}
                 </SectionLink>
               )}
@@ -496,13 +538,13 @@ export function FloatingButtons() {
     return () => window.removeEventListener("scroll", on);
   }, []);
   return (
-    <div className="fixed bottom-5 right-5 z-30 flex flex-col gap-3">
+    <div className="fixed bottom-4 right-4 z-30 flex flex-col gap-2 md:bottom-5 md:right-5 md:gap-3">
       <button
         onClick={scrollToTop}
         aria-label="Back to top"
         tabIndex={show ? 0 : -1}
         className={cn(
-          "grid h-12 w-12 place-items-center border-2 border-ink bg-surface text-ink shadow-[var(--shadow-px)] transition-all duration-300 hover:-translate-y-0.5",
+          "grid h-11 w-11 place-items-center border-2 border-ink bg-surface md:h-12 md:w-12 text-ink shadow-[var(--shadow-px)] transition-all duration-300 hover:-translate-y-0.5",
           show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0",
         )}
       >
@@ -513,7 +555,7 @@ export function FloatingButtons() {
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
-        className="grid h-12 w-12 place-items-center border-2 border-navy bg-lime text-navy shadow-[var(--shadow-px)] transition-transform duration-200 hover:-translate-y-0.5"
+        className="grid h-11 w-11 place-items-center border-2 border-navy bg-lime md:h-12 md:w-12 text-navy shadow-[var(--shadow-px)] transition-transform duration-200 hover:-translate-y-0.5"
       >
         <MessageCircle className="h-5 w-5" />
       </a>

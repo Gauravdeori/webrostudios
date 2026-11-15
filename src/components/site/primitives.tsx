@@ -149,7 +149,7 @@ export function Section({
       data-section={label ? id : undefined}
       data-label={label}
       className={cn(
-        "relative scroll-mt-20 py-20 md:py-28",
+        "relative scroll-mt-28 py-14 md:py-28",
         tone === "light" && "bg-background text-ink",
         tone === "white" && "bg-surface text-ink",
         tone === "navy" && "bg-navy text-navy-foreground",
@@ -187,13 +187,13 @@ export function SectionHeading({
           aria-hidden="true"
           className={cn("inline-block h-2 w-2", navy ? "bg-lime" : "bg-ink")}
         />
-        {label.replace(/^\/\/\s*/, "")}
+        {label.replace(/^\/\/\s*/, "").replace(/^\d+\s*—\s*/, "")}
       </p>
       <h2 className="glow text-4xl font-bold leading-[1.05] md:text-[56px]">{title}</h2>
       {subtitle && (
         <p
           className={cn(
-            "cursor-blink mt-5 font-mono text-sm md:text-base",
+            "cursor-blink mt-5 text-base md:text-lg",
             navy ? "text-slate-light" : "text-muted-foreground",
           )}
         >
